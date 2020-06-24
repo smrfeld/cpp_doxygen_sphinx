@@ -64,8 +64,8 @@ jobs:
     - name: Requirements
       run: brew install doxygen
         && brew install sphinx-doc
-        && pip install sphinx-rtd-theme
-        && pip install breathe
+        && pip3 install sphinx-rtd-theme
+        && pip3 install breathe
     - name: Build docs
       run: cd docs_sphinx
         && make html
@@ -77,10 +77,17 @@ jobs:
         FOLDER: docs_sphinx/_build/html # The folder the action should deploy.
 ```
 Breaking it down:
-* `Requirements`: Some stuff comes pre-installed on the image, some doesn't. Luckily `brew` and `pip` do, but `doxygen` and `sphinx` and such - well you are on your own! The complete list of pre-installed software is [here](https://github.com/actions/virtual-environments/blob/master/images/macos/macos-10.15-Readme.md).
+* The action is triggered on push to the master branch. Generally you should be pushing most commits to other branches anyways, so this action should only run occasionally when the main code branch is updated.
+* `Requirements`: Some stuff comes pre-installed on the image, some doesn't. Luckily `brew` and `pip` do, but `doxygen` and `sphinx` and such - well you are on your own! The complete list of pre-installed software is [here](https://github.com/actions/virtual-environments/blob/master/images/macos/macos-10.15-Readme.md). Note that we used `pip3` for `python3`.
 * `Build docs`: This builds the docs just like before.
 * `Deploy`: This deploys the `docs_sphinx/_build/html` folder.
-
+* Note that you can **disable** your actions by changing them to
+    ```
+    push:
+      branches-ignore:
+        - '**'  
+    '''
+    
 Add it to the `git` repo and push:
 ```
 git add .github
@@ -90,4 +97,9 @@ git push
 
 ## Check online
 
-Check online on your `GitHub` page under `Actions` at the top. You should see the latest `Docs` action running (or finished). You can check the output logs of each step and see where it failed.
+Check online on your `GitHub` page under `Actions` at the top. You should see the latest `Docs` action running (or finished). You can check the output logs of each step and see where it failed. 
+
+You can try to use [here](https://github.com/nektos/act) to debug the actions a little, but it is generally a headache, and probably will be easier to just edit and push.
+
+To save on time spent installing prerequisites, you can try to use the [GitHub artifacts](https://help.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts).
+
