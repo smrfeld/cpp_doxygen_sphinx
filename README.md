@@ -6,7 +6,7 @@
 
 The goal here is to set up the documentation for a `C++` project. The end result will be documentation for `C++` library in the `ReadTheDocs` theme hosted on `GitHub`, as shown below.
 
-[The final website is here.](smrfeld.github.io/cpp_doxygen_sphinx)
+[The final website is here.](https://smrfeld.github.io/cpp_doxygen_sphinx)
 
 <img src="readme_figures/pic3.png" alt="drawing" width="400"/>
 
