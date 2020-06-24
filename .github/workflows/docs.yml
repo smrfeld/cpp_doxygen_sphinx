@@ -1,13 +1,13 @@
 name: Docs
 
 on:
-  push:
-    branches-ignore:
-      - '**'  
   #push:
-  #  branches: [ master ]
-  #pull_request:
-  #  branches: [ master ]
+  #  branches-ignore:
+  #    - '**'  
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
   
 jobs:
   build:
@@ -21,6 +21,7 @@ jobs:
         && pip3 install sphinx-rtd-theme
         && pip3 install breathe
     - name: Build docs
+      uses: actions/checkout@1.0.0
       run: cd docs_sphinx
         && make html
     - name: Deploy

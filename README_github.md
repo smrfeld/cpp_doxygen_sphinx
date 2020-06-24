@@ -32,7 +32,8 @@ Use the instructions to push your initial commit to GitHub.
 ## GitHub Actions
 
 `GitHub Actions` are fancy because there is a great marketplace of predefined actions for us to use, so we don't have to play around with it too much.
-`GitHub Actions` are **not** fancy because there is no good way to test your actions "offline" (except [here](https://github.com/nektos/act), but it's kind of a pain).
+
+`GitHub Actions` are **not** fancy because there is no good way to test your actions "offline" (except [here](https://github.com/nektos/act), but it's kind of a pain). You can however sort of debug them while they are running use the excellent [mxschmitt/action-tmate@v2](https://github.com/mxschmitt/action-tmate) action - more on that below.
 
 We are going to use [this great Deploy to GitHub Pages action](https://github.com/marketplace/actions/deploy-to-github-pages). Go ahead and navigate there, click use latest. You can see the snippet that we will use.
 
@@ -81,13 +82,7 @@ Breaking it down:
 * `Requirements`: Some stuff comes pre-installed on the image, some doesn't. Luckily `brew` and `pip` do, but `doxygen` and `sphinx` and such - well you are on your own! The complete list of pre-installed software is [here](https://github.com/actions/virtual-environments/blob/master/images/macos/macos-10.15-Readme.md). Note that we used `pip3` for `python3`.
 * `Build docs`: This builds the docs just like before.
 * `Deploy`: This deploys the `docs_sphinx/_build/html` folder.
-* Note that you can **disable** your actions by changing them to
-    ```
-    push:
-      branches-ignore:
-        - '**'  
-    '''
-    
+
 Add it to the `git` repo and push:
 ```
 git add .github
@@ -99,7 +94,29 @@ git push
 
 Check online on your `GitHub` page under `Actions` at the top. You should see the latest `Docs` action running (or finished). You can check the output logs of each step and see where it failed. 
 
+## Debugging your action
+
 You can try to use [here](https://github.com/nektos/act) to debug the actions a little, but it is generally a headache, and probably will be easier to just edit and push.
 
-To save on time spent installing prerequisites, you can try to use the [GitHub artifacts](https://help.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts).
+You can sort of debug your action using `tmate` using the following [mxschmitt/action-tmate@v2](https://github.com/mxschmitt/action-tmate) action - create a new one called `.github/workflows/ssh.yml` with contents:
+```
+name: CI
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v2
+```
+After you commit and push, you can navigate to the Actions page on GitHub and see the `ssh` address of your environment. You can `ssh` using a terminal and get a live way to configure and build your action. Make sure you **cancel the action at some point**, else it will run forever.
 
+Note that you can **disable** your actions by changing them to
+```
+push:
+    branches-ignore:
+    - '**'  
+```
+
+To save on time spent installing prerequisites, you can try to use the [GitHub artifacts](https://help.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts).
