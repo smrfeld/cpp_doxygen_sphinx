@@ -4,6 +4,8 @@
 
 <img src="readme_figures/header.jpg" alt="drawing" width="400"/>
 
+**Note** You could read all this in a nicer format on [Medium here](https://medium.com/@karlsson.vom.dach/c-documentation-with-doxygen-cmake-sphinx-breathe-for-those-of-use-who-are-totally-lost-452c9829deaa).
+
 The goal here is to set up the documentation for a `C++` project. The end result will be documentation for `C++` library in the `ReadTheDocs` theme hosted on `GitHub`, as shown below.
 
 [The final website is here.](https://smrfeld.github.io/cpp_doxygen_sphinx)
