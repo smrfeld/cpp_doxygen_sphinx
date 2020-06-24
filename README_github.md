@@ -67,6 +67,7 @@ jobs:
         && brew install sphinx-doc
         && pip3 install sphinx-rtd-theme
         && pip3 install breathe
+        && pip3 install sphinx-sitemap
     - name: Build docs
       run: cd docs_sphinx
         && make html
@@ -80,6 +81,7 @@ jobs:
 Breaking it down:
 * The action is triggered on push to the master branch. Generally you should be pushing most commits to other branches anyways, so this action should only run occasionally when the main code branch is updated.
 * `Requirements`: Some stuff comes pre-installed on the image, some doesn't. Luckily `brew` and `pip` do, but `doxygen` and `sphinx` and such - well you are on your own! The complete list of pre-installed software is [here](https://github.com/actions/virtual-environments/blob/master/images/macos/macos-10.15-Readme.md). Note that we used `pip3` for `python3`.
+* `Checkout repo`: An important step. This didn't use to be required, but now it is so beware!
 * `Build docs`: This builds the docs just like before.
 * `Deploy`: This deploys the `docs_sphinx/_build/html` folder.
 
