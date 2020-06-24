@@ -1,0 +1,28 @@
+name: Docs
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Requirements
+      run: brew install doxygen
+        && brew install sphinx-doc
+        && pip install sphinx-rtd-theme
+        && pip install breathe
+    - name: Build docs
+      run: cd docs_sphinx
+        && make html
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages # The branch the action should deploy to.
+        FOLDER: docs_sphinx/_build/html # The folder the action should deploy.
