@@ -94,7 +94,17 @@ git push
 
 ## Check online
 
-Check online on your `GitHub` page under `Actions` at the top. You should see the latest `Docs` action running (or finished). You can check the output logs of each step and see where it failed. 
+Check online on your `GitHub` page under `Actions` at the top. You should see the latest `Docs` action running (or finished). You can check the output logs of each step and see where it failed. If it throws some errors, see the next section to debug the actions.
+
+If everything worked, you should now have a fancy GitHub page! You will notice that there is a new branch called `gh-pages`. This branch will look very different - it will just be the website pages.
+
+You can find your website online at:
+```
+https://username.github.io/project-name/
+```
+Note that the `project-name` is case sensitive, 
+
+If it doesn't show up, try going to the settings on GitHub and turning the pages on/off (select a different branch like `master`, and then back to `gh-pages`).
 
 ## Debugging your action
 

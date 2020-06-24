@@ -19,9 +19,13 @@ Make sure you have all the needed tools installed:
     ```
     pip install sphinx-rtd-theme
     ```
-* [Breahte](https://github.com/michaeljones/breathe)
+* [Breathe](https://github.com/michaeljones/breathe)
     ```
     pip install breathe
+    ```
+* Any other `Sphinx` configuration packages you may want, e.g.:
+    ```
+    pip3 install sphinx-sitemap
     ```
 
 ## Setting up the project
