@@ -87,3 +87,7 @@ git add .github
 git commit -m "Docs"
 git push
 ```
+
+## Check online
+
+Check online on your `GitHub` page under `Actions` at the top. You should see the latest `Docs` action running (or finished). You can check the output logs of each step and see where it failed.
