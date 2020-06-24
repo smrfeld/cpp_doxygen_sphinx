@@ -14,7 +14,9 @@ If you are on Windows/Linux, well, you'll figure it out :)
 
 If you've never used `CMake`, it's easiest to start with a generator for a basic `CMakeLists.txt` file. Open the folder in which the project will reside in `Visual Studio Code`. In the `Visual Studio Code` extensions, install the `CMake Tools` extension.
 
-Fire up the command pallate (command-shift-P) and choose `CMake Quick Start`. Follow the prompts and enter the project name - here we will use `cpp_doxygen_sphinx`. You should find in the directory two new files: `CMakeLists.txt` and `cpp_doxygen_sphinx.cpp`. Mine look like this:
+Fire up the command pallate (command-shift-P) and choose `CMake Quick Start`. Follow the prompts and enter the project name - here we will use `cpp_doxygen_sphinx`. We are going to build a library instead of an exectuable - I feel it is more common for a project you would want to document.
+
+You should find in the directory two new files: `CMakeLists.txt` and `cpp_doxygen_sphinx.cpp`. Mine look like this:
 ```
 cmake_minimum_required(VERSION 3.0.0)
 project(cpp_doxygen_sphinx VERSION 0.1.0)
@@ -47,7 +49,7 @@ Test that it works using your favorite IDE or the command line:
     ```
     Open the `Xcode` project in the `build` directory. Switch the target to `build` and hit the big run button.
 
-* VS code: run `CMakthe e: Build` command in the pallete.
+* VS code: run `CMake: Build` command in the pallete.
 * Command line: or by heading to the `build` folder in your main directory and run:
     ```
     cd cpp_doxygen_sphinx/build
@@ -231,6 +233,7 @@ class Foo {
 ```
 Build again.
 
-Hopefully your warnings have gone away, and your `index.html` contains some nice(r) documentation.
+Hopefully your warnings have gone away, and your `index.html` contains some nice(r) documentation. Mine looks like:
+<img src="readme_figures/pic0.png" alt="drawing" width="400"/>
 
 That's all for this first part. We won't try to get the Doxygen website to look any nicer - here it is just such that some warning can appear in the build telling you that you didn't comment anything. For the actual website, we will use `Sphinx/ReadTheDocs/Breathe`, as described in the [next part](README_sphinx.md).

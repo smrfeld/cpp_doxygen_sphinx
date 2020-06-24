@@ -51,6 +51,9 @@ Open `docs.yml` and edit it such that it reads
 name: Docs
 
 on:
+  #push:
+  #  branches-ignore:
+  #    - '**'  
   push:
     branches: [ master ]
   pull_request:
@@ -68,9 +71,13 @@ jobs:
         && pip3 install sphinx-rtd-theme
         && pip3 install breathe
         && pip3 install sphinx-sitemap
+    - name: Checkout repo
+      uses: actions/checkout@1.0.0
     - name: Build docs
       run: cd docs_sphinx
         && make html
+        && cd _build/html
+        && touch .nojekyll
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
@@ -79,10 +86,18 @@ jobs:
         FOLDER: docs_sphinx/_build/html # The folder the action should deploy.
 ```
 Breaking it down:
-* The action is triggered on push to the master branch. Generally you should be pushing most commits to other branches anyways, so this action should only run occasionally when the main code branch is updated.
+* The action is triggered on push to the master branch. Generally you should be pushing most commits to other branches anyways, so this action should only run occasionally when the main code branch is updated. Those commented out lines can be used to disable the action.
 * `Requirements`: Some stuff comes pre-installed on the image, some doesn't. Luckily `brew` and `pip` do, but `doxygen` and `sphinx` and such - well you are on your own! The complete list of pre-installed software is [here](https://github.com/actions/virtual-environments/blob/master/images/macos/macos-10.15-Readme.md). Note that we used `pip3` for `python3`.
 * `Checkout repo`: An important step. This didn't use to be required, but now it is so beware!
-* `Build docs`: This builds the docs just like before.
+* `Build docs`: This builds the docs just like before, with one very important addition:
+    GitHub pages uses Jekyll to build it's websites, which ignores directories that start with a `_`. This is a problem because many of the files we care about like `.js` and `.css` files are in the `_static` folder. The easy workaround is to disable Jekyll entirely with:
+    ```
+    ...
+    && cd _build/html
+    && touch .nojekyll
+    ```
+    As I learned [here](https://stackoverflow.com/a/39691475/1427316) (as always, answers to all of life's problems can be found on stack overflow!).
+
 * `Deploy`: This deploys the `docs_sphinx/_build/html` folder.
 
 Add it to the `git` repo and push:
@@ -105,6 +120,10 @@ https://username.github.io/project-name/
 Note that the `project-name` is case sensitive, 
 
 If it doesn't show up, try going to the settings on GitHub and turning the pages on/off (select a different branch like `master`, and then back to `gh-pages`).
+
+Below is mine.
+
+<img src="readme_figures/pic3.png" alt="drawing" width="400"/>
 
 ## Debugging your action
 
