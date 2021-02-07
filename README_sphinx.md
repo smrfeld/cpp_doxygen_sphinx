@@ -299,6 +299,7 @@ API
 ===
 
 .. toctree::
+
     :maxdepth: 2
     :glob:
 
@@ -325,6 +326,7 @@ Welcome to C++ Sphinx Doxygen Breathe's documentation!
 ======================================================
 
 .. toctree::
+
    :maxdepth: 2
    :caption: Contents:
 
@@ -342,6 +344,7 @@ Table of Contents
 ^^^^^^^^^^^^^^^^^
 
 .. toctree::
+
     :maxdepth: 2
 
     self
@@ -354,12 +357,16 @@ make html
 ```
 Hopefully there will be no errors!
 
+*Thanks to Daniel Heater for correcting bugs in these .rst files.*
+
 ## Result
 
 Your final `_build/html/index.html` should look like this:
+
 <img src="readme_figures/pic1.png" alt="drawing" width="400"/>
 
 Clicking on the `Foo` class should give you some nice docs:
+
 <img src="readme_figures/pic2.png" alt="drawing" width="400"/>
 
 Now you can dive into the horror that is `rst` to make your docs great again.
