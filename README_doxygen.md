@@ -148,8 +148,10 @@ mv Doxyfile Doxyfile.in
 ```
 You can edit some fields in `Doxyfile.in`. The following are some useful ones:
 * `PROJECT_NAME` - self explanatory, here we set `cpp_doxygen_sphinx`.
-* `VERBATIM_HEADERS       = NO` - otherwise sources for header files will be included in the docs - I usually find this redundant.
-* `GENERATE_LATEX         = NO` - it's on by default, but you might not need it.
+* `VERBATIM_HEADERS       = NO`  - otherwise sources for header files will be included in the docs - I usually find this redundant.
+* `GENERATE_LATEX         = NO`  - it's on by default, but you might not need it.
+* `EXTRACT_ALL            = YES` - not always on per default, but makes sure to extract undocumented sources.
+* `EXTRACT_PRIVATE        = YES` - not always on per default, but required to also extract private members
 
 Now the actual heart of the docs generation:
 * `OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/docs_doxygen/` - Note that `CMAKE_CURRENT_BINARY_DIR` is the `build` directory in this case.
